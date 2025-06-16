@@ -19,7 +19,7 @@ class Store:
         if product in self.list_of_products:
             self.list_of_products.remove(product)
         else:
-            raise ValueError("Product not found")
+            raise ValueError(f"Error: Product {product.name} not found")
 
 
     def get_total_quantity(self):
@@ -50,22 +50,26 @@ class Store:
         Product (Product class) and quantity (int).
         Buys the products and returns the total price of the order.
         """
-        total_price = 0
-        for order in shopping_list:
-            product, quantity = order
-            total_price += product.buy(quantity)
+        try:
+            total_price = 0
+            for order in shopping_list:
+                product, quantity = order
+                total_price += product.buy(quantity)
 
-        return total_price
+            return total_price
+        except Exception as e:
+            raise Exception(e)
+
 
 def main():
-    """
+
     bose = products.Product("Bose QuietComfort Earbuds", price=250, quantity=500)
     mac = products.Product("MacBook Air M2", price=1450, quantity=100)
 
     best_buy = Store([bose, mac])
     price = best_buy.order([(bose, 5), (mac, 30), (bose, 10)])
     print(f"Order cost: {price} dollars.")
-    """
+
     product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                     products.Product("Google Pixel 7", price=500, quantity=250),

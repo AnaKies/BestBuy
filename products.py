@@ -1,21 +1,21 @@
 class Product:
     def __init__(self, name, price, quantity):
         if not name or name == '':
-            raise ValueError("Name cannot be empty")
+            raise ValueError(f"Error: Name {name} cannot be empty")
         if price < 0:
-            raise ValueError("Price cannot be negative")
+            raise ValueError(f"Price {price} cannot be negative")
         if quantity < 0:
-            raise ValueError("Quantity cannot be negative")
+            raise ValueError(f"Quantity {quantity} cannot be negative")
         self.name = name
         try:
             self.price = float(price)
         except Exception:
-            raise ValueError("Price must be a decimal number")
+            raise ValueError(f"Price {price} must be a decimal number")
 
         try:
             self.quantity = int(quantity)
         except Exception:
-            raise ValueError("Quantity must be a number")
+            raise ValueError(f"Quantity {quantity} must be a number")
         self.active = True
 
     def get_quantity(self):
@@ -59,7 +59,7 @@ class Product:
         Returns a string that represents the product
         """
         product_info = f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
-        print(product_info)
+        return product_info
 
     def buy(self, quantity):
         """
@@ -68,10 +68,10 @@ class Product:
         Updates the quantity of the product.
         """
         if not self.active:
-            raise ValueError("Product is not available")
+            raise ValueError(f"Error: Product {self.name} is not available")
 
         if quantity > self.quantity:
-            raise ValueError("Quantity cannot be greater than product quantity")
+            raise ValueError(f"Error in {self.name} : Quantity {quantity} cannot be greater than product quantity {self.quantity}")
         # reduce the initial quantity
         self.set_quantity(self.quantity - quantity)
         # total price of the bought items
@@ -86,8 +86,8 @@ def main():
     print(mac.buy(100))
     print(mac.is_active())
 
-    bose.show()
-    mac.show()
+    print(bose.show())
+    print(mac.show())
 
     bose.set_quantity(1000)
     bose.show()

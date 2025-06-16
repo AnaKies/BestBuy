@@ -7,8 +7,15 @@ class Product:
         if quantity < 0:
             raise ValueError("Quantity cannot be negative")
         self.name = name
-        self.price = price
-        self.quantity = quantity
+        try:
+            self.price = float(price)
+        except Exception:
+            raise ValueError("Price must be a decimal number")
+
+        try:
+            self.quantity = int(quantity)
+        except Exception:
+            raise ValueError("Quantity must be a number")
         self.active = True
 
     def get_quantity(self):

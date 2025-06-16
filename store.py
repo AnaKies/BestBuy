@@ -54,8 +54,8 @@ class Store:
                 total_price += product.buy(quantity)
 
             return total_price
-        except Exception as e:
-            raise Exception(e)
+        except Exception as error:
+            raise Exception(error)
 
 
 def main():

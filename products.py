@@ -71,12 +71,15 @@ class Product:
             raise ValueError(f"Error: Product {self.name} is not available")
 
         if quantity > self.quantity:
-            raise ValueError(f"Error in {self.name} : Quantity {quantity} cannot be greater than product quantity {self.quantity}")
+            raise ValueError(f"Error in {self.name}: "
+                             f"Quantity {quantity} cannot be greater than "
+                             f"product quantity {self.quantity}")
         # reduce the initial quantity
         self.set_quantity(self.quantity - quantity)
         # total price of the bought items
         total_price = float(self.price * quantity)
         return total_price
+
 
 def main():
     bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
@@ -91,6 +94,7 @@ def main():
 
     bose.set_quantity(1000)
     bose.show()
+
 
 if __name__ == "__main__":
     main()

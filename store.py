@@ -21,7 +21,6 @@ class Store:
         else:
             raise ValueError(f"Error: Product {product.name} not found")
 
-
     def get_total_quantity(self):
         """
         Returns how many items are in the store in total.
@@ -30,7 +29,6 @@ class Store:
         for product in self.list_of_products:
             total_items += product.quantity
         return total_items
-
 
     def get_all_products(self):
         """
@@ -42,7 +40,6 @@ class Store:
             if product.active:
                 active_products_list.append(product)
         return active_products_list
-
 
     def order(self, shopping_list):
         """
@@ -62,7 +59,6 @@ class Store:
 
 
 def main():
-
     bose = products.Product("Bose QuietComfort Earbuds", price=250, quantity=500)
     mac = products.Product("MacBook Air M2", price=1450, quantity=100)
 

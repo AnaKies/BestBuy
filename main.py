@@ -16,6 +16,9 @@ def print_menu():
 
 
 def list_all_products(product_store):
+    """
+    List all products in store.
+    """
     all_products_in_store = product_store.get_all_products()
 
     print("------")
@@ -27,37 +30,50 @@ def list_all_products(product_store):
 
 
 def show_total_products(product_store):
+    """
+    Show the total amount of products in store.
+    """
     all_products_list = product_store.get_total_quantity()
     print(f"Total of {all_products_list} items in store")
 
 
 def place_order(product_store):
+    """
+    Place an order.
+    """
     try:
-        list_all_products(product_store)
-        print("When you want to finish order, enter empty text.")
         order_list = []
         list_of_all_active_products_in_store = product_store.get_all_products()
+        print("When you want to finish order, enter empty text.")
 
         while True:
             user_order = input("Which product # do you want? ").strip()
-            if user_order == "".strip():
+            if user_order == "":
                 break
             user_amount = input("What amount do you want? ")
 
             try:
-                user_order = int(user_order) - 1 # decrement, because the index in menu starts at 1
-                chosen_product = list_of_all_active_products_in_store[user_order]
+                # decrement, because the index in menu starts at 1
+                product_index = int(user_order) - 1
+                chosen_product = list_of_all_active_products_in_store[product_index]
                 order_list.append((chosen_product, int(user_amount)))
-
             except (ValueError, TypeError):
                 raise ValueError("Invalid input")
+            except Exception as error:
+                print(f"Error placing order: {error}")
 
             print("Product added to list!\n")
+
+        if not order_list:
+            print("No products were placed in the order list.")
+            return
+
         total_price = product_store.order(order_list)
         print(f"Order made! Total payment: ${total_price}")
 
     except Exception as error:
         print(f"Error adding product!: {error}")
+
 
 def get_user_choice():
     """
